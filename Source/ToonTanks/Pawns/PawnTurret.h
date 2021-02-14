@@ -18,19 +18,22 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void HandleDestruction() override;
 
+	float GetFireRange();
+	FTimerHandle GetFireRateTimerHandle();
+
 protected:
 
 	virtual void BeginPlay() override;
-	
+	APawnTank* PlayerTank;
+
+	float ReturnDistanceToPlayer();
 
 private:
 
 	void CheckFireCondition();
-	float ReturnDistanceToPlayer();
-
+	
 	FTimerHandle FireRateTimerHandle;
-	APawnTank* PlayerTank;
-
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = true))
 	float FireRate = 2.0f;
 

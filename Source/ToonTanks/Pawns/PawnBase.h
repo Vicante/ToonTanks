@@ -22,6 +22,8 @@ public:
 
 	virtual void HandleDestruction();
 
+	UStaticMeshComponent* GetBaseMesh();
+
 private:
 	//COMPONENTS
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly ,Category = "Components", meta = (AllowPrivateAccess = true))
@@ -49,4 +51,6 @@ protected:
 
 	void RotateTurret(FVector LookAtTarget);
 	void Fire();
+	FRotator CalculateComponentRotation(FVector LookAtTarget, FVector ComponentLocation);
+
 };

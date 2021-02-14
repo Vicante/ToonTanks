@@ -21,6 +21,16 @@ void APawnTurret::HandleDestruction()
 	Destroy();
 }
 
+float APawnTurret::GetFireRange()
+{
+	return FireRange;
+}
+
+FTimerHandle APawnTurret::GetFireRateTimerHandle()
+{
+	return FireRateTimerHandle;
+}
+
 void APawnTurret::CheckFireCondition()
 {
 	if (!PlayerTank || !PlayerTank->GetIsPlayerAlive()) 

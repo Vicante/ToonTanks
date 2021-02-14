@@ -19,6 +19,11 @@ void APawnTank::BeginPlay()
 {
 	Super::BeginPlay();
 	PlayerReference = Cast<APlayerController>(GetController());
+
+	FVector TankLocation = GetActorLocation();
+
+	//TODO: Fix weird bug
+	SetActorLocation(FVector(TankLocation.X, TankLocation.Y, 88.0f));
 }
 
 void APawnTank::HandleDestruction()

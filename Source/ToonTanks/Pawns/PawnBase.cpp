@@ -32,11 +32,7 @@ APawnBase::APawnBase()
 
 void APawnBase::RotateTurret(FVector LookAtTarget)
 {
-	
-	FVector LookAtTargetCleaned = FVector(LookAtTarget.X, LookAtTarget.Y, TurretMesh->GetComponentLocation().Z);
-	FVector StartLocation = TurretMesh->GetComponentLocation();
-	
-	FRotator TurretRotation = FVector(LookAtTargetCleaned - StartLocation).Rotation();
+	FRotator TurretRotation = CalculateComponentRotation(LookAtTarget, TurretMesh->GetComponentLocation());
 	TurretMesh->SetWorldRotation(TurretRotation);
 }
 
@@ -51,9 +47,21 @@ void APawnBase::Fire()
 	}
 }
 
+FRotator APawnBase::CalculateComponentRotation(FVector LookAtTarget, FVector ComponentLocation)
+{
+	FVector LookAtTargetCleaned = FVector(LookAtTarget.X, LookAtTarget.Y, ComponentLocation.Z);
+	FRotator ComponentRotation = FVector(LookAtTargetCleaned - ComponentLocation).Rotation();
+	return ComponentRotation;
+}
+
 void APawnBase::HandleDestruction()
 {
 	UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticle, GetActorLocation());
 	UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
 	GetWorld()->GetFirstPlayerController()->ClientPlayCameraShake(DeathShake);
+}
+
+UStaticMeshComponent* APawnBase::GetBaseMesh()
+{
+	return BaseMesh;
 }

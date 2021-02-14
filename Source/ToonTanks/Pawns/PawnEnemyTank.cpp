@@ -24,8 +24,6 @@ void APawnEnemyTank::Tick(float DeltaTime)
 	}	
 }
 
-
-
 void APawnEnemyTank::RotateBase()
 {	
 	CalculateRotation();

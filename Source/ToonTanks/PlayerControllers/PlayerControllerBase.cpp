@@ -8,10 +8,11 @@
 void APlayerControllerBase::BeginPlay()
 {
 	Super::BeginPlay();
-	UUserWidget* HealWidget = CreateWidget(this, HealthScreenClass);
-	if (HealWidget != nullptr)
+	UUserWidget* HealthWidget = CreateWidget(this, HealthScreenClass);
+	if (HealthWidget != nullptr)
 	{
-		HealWidget->AddToViewport();
+		HealthWidget->AddToViewport();
+		
 	}
 }
 

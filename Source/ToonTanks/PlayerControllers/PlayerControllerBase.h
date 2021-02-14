@@ -17,4 +17,12 @@ class TOONTANKS_API APlayerControllerBase : public APlayerController
 public:
 	
 	void SetPlayerEnabledState(bool SetPlayerEnabled);
+
+protected:
+	// Called when the game starts
+	virtual void BeginPlay() override;
+
+private:
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> HealthScreenClass;
 };

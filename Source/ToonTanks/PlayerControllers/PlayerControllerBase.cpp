@@ -2,6 +2,18 @@
 
 
 #include "PlayerControllerBase.h"
+#include "Blueprint/UserWidget.h"
+
+
+void APlayerControllerBase::BeginPlay()
+{
+	Super::BeginPlay();
+	UUserWidget* HealWidget = CreateWidget(this, HealthScreenClass);
+	if (HealWidget != nullptr)
+	{
+		HealWidget->AddToViewport();
+	}
+}
 
 void APlayerControllerBase::SetPlayerEnabledState(bool SetPlayerEnabled)
 {

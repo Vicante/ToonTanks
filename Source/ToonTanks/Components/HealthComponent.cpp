@@ -15,6 +15,11 @@ UHealthComponent::UHealthComponent()
 	// ...
 }
 
+float UHealthComponent::CalculateHealthPercetage() const
+{
+	return Health/DefaultHealth;
+}
+
 
 // Called when the game starts
 void UHealthComponent::BeginPlay()

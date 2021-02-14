@@ -24,6 +24,9 @@ public:
 
 	UStaticMeshComponent* GetBaseMesh();
 
+	UFUNCTION(BlueprintPure)
+	float GetRemainingHealth() const;
+
 private:
 	//COMPONENTS
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly ,Category = "Components", meta = (AllowPrivateAccess = true))

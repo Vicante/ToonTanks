@@ -38,4 +38,6 @@ private:
 	float RotationThreshold = 10.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = true))
 	float CombatRange = 800.0f;
+
+	bool HasSeenPlayer = false;
 };

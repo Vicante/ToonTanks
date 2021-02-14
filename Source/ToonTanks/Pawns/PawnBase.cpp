@@ -65,3 +65,8 @@ UStaticMeshComponent* APawnBase::GetBaseMesh()
 {
 	return BaseMesh;
 }
+
+float APawnBase::GetRemainingHealth() const
+{
+	return HealthComponent->CalculateHealthPercetage();
+}

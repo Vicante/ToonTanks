@@ -7,13 +7,18 @@
 
 void APawnEnemyTank::Tick(float DeltaTime)
 {
-	//If the player is either dead or outside the combat range, do nothing
-	if (!PlayerTank || ReturnDistanceToPlayer() > CombatRange)
+	//If the player is either dead, do nothing
+	if (!PlayerTank)
 	{
 		return;
 	}
-
-	else if (ReturnDistanceToPlayer() <= CombatRange)
+	//Check if the player was seen
+	if (ReturnDistanceToPlayer() <= CombatRange)
+	{
+		HasSeenPlayer = true;
+	}	
+	//Follow and attack player
+	if (HasSeenPlayer) 
 	{
 		RotateTurret(PlayerTank->GetActorLocation());
 		RotateBase();
@@ -21,7 +26,7 @@ void APawnEnemyTank::Tick(float DeltaTime)
 		{
 			Move();
 		}
-	}	
+	}
 }
 
 void APawnEnemyTank::RotateBase()

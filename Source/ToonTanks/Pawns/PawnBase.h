@@ -27,6 +27,8 @@ public:
 	UFUNCTION(BlueprintPure)
 	float GetRemainingHealth() const;
 
+	void RotateTurret(FVector LookAtTarget);
+
 private:
 	//COMPONENTS
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly ,Category = "Components", meta = (AllowPrivateAccess = true))
@@ -52,7 +54,6 @@ private:
 
 protected:
 
-	void RotateTurret(FVector LookAtTarget);
 	void Fire();
 	FRotator CalculateComponentRotation(FVector LookAtTarget, FVector ComponentLocation);
 

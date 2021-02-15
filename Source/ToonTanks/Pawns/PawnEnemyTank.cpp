@@ -5,28 +5,15 @@
 #include "PawnTank.h"
 #include "Kismet/KismetMathLibrary.h"
 
-void APawnEnemyTank::Tick(float DeltaTime)
+
+APawnEnemyTank::APawnEnemyTank()
 {
-	//If the player is either dead, do nothing
-	if (!PlayerTank)
-	{
-		return;
-	}
-	//Check if the player was seen
-	if (ReturnDistanceToPlayer() <= CombatRange)
-	{
-		HasSeenPlayer = true;
-	}	
-	//Follow and attack player
-	if (HasSeenPlayer) 
-	{
-		RotateTurret(PlayerTank->GetActorLocation());
-		RotateBase();
-		if (ReturnDistanceToPlayer() > GetFireRange())
-		{
-			Move();
-		}
-	}
+	PrimaryActorTick.bCanEverTick = false;
+}
+
+float APawnEnemyTank::GetCombatRange()
+{
+	return CombatRange;
 }
 
 void APawnEnemyTank::RotateBase()

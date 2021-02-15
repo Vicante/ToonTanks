@@ -12,7 +12,6 @@ void APlayerControllerBase::BeginPlay()
 	if (HealthWidget != nullptr)
 	{
 		HealthWidget->AddToViewport();
-		
 	}
 }
 

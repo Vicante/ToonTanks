@@ -15,20 +15,19 @@ class TOONTANKS_API APawnEnemyTank : public APawnTurret
 	GENERATED_BODY()
 
 public:
-
-	virtual void Tick(float DeltaTime) override;
 	
 	FVector MovementDirection;
 	FQuat RotationDirection;
 
-private:
-
+	float GetCombatRange();
 	void RotateBase();
-
-	void CalculateRotation();
-
 	void Move();
 
+private:
+
+	APawnEnemyTank();
+
+	void CalculateRotation();
 	//MOVEMENT RELATED VARIABLES
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = true))
 	float MovementSpeed = 150.0f;
@@ -38,6 +37,5 @@ private:
 	float RotationThreshold = 10.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = true))
 	float CombatRange = 800.0f;
-
 	bool HasSeenPlayer = false;
 };

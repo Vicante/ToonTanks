@@ -4,11 +4,13 @@
 #include "PawnEnemyTank.h"
 #include "PawnTank.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "../Components/TankMovementComponent.h"
 
 
 APawnEnemyTank::APawnEnemyTank()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	MovementComponent = CreateDefaultSubobject<UTankMovementComponent>(TEXT("Movement Component"));
 }
 
 float APawnEnemyTank::GetCombatRange()
@@ -44,6 +46,7 @@ void APawnEnemyTank::CalculateRotation()
 		return;
 	}
 	float RotateAmount = RotationOrientation * RotationSpeed * GetWorld()->DeltaTimeSeconds;
+	//UE_LOG(LogTemp, Warning, TEXT("DIRECTION CLASSIC: %f"), RotateAmount);
 	FRotator Rotation = FRotator(0.0f, RotateAmount, 0.0f);
 	RotationDirection = FQuat(Rotation);
 }

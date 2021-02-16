@@ -6,6 +6,7 @@
 #include "PawnTurret.h"
 #include "PawnEnemyTank.generated.h"
 
+class UTankMovementComponent;
 /**
  * 
  */
@@ -38,4 +39,6 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = true))
 	float CombatRange = 800.0f;
 	bool HasSeenPlayer = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
+	UTankMovementComponent* MovementComponent;
 };

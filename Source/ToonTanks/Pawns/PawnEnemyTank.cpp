@@ -18,12 +18,14 @@ float APawnEnemyTank::GetCombatRange()
 	return CombatRange;
 }
 
+//DEPRECATED
 void APawnEnemyTank::RotateBase()
 {	
 	CalculateRotation();
 	AddActorLocalRotation(RotationDirection, true);
 }
 
+//DEPRECATED
 void APawnEnemyTank::CalculateRotation()
 {
 	//Direction where the player is at the moment
@@ -51,6 +53,7 @@ void APawnEnemyTank::CalculateRotation()
 	RotationDirection = FQuat(Rotation);
 }
 
+//DEPRECATED
 void APawnEnemyTank::Move()
 {	
 	MovementDirection = FVector(MovementSpeed * GetWorld()->DeltaTimeSeconds, 0.0f, 0.0f);

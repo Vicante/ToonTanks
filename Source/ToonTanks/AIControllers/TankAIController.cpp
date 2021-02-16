@@ -27,17 +27,10 @@ void ATankAIController::Tick(float DeltaTime)
 		HasSeenPlayer = true;
 	}
 
-	MoveToActor(PlayerTank, 300.0f);
+	//Chase player
 	if (HasSeenPlayer)
 	{
-
-		
-		//ControlledTank->RotateTurret(PlayerTank->GetActorLocation());
-		//ControlledTank->RotateBase();
-		//if (ReturnDistanceToPlayer() > ControlledTank->GetFireRange())
-		//{
-		//	ControlledTank->Move();
-		//}
+		MoveToActor(PlayerTank, AcceptanceRadius);
 	}
 }
 

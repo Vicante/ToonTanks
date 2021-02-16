@@ -28,11 +28,12 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
 
 	auto ForwardDirection = FVector::DotProduct(TankForward, AIForwardIntention);
-	auto RightDirection = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+	auto RightDirection = FVector::CrossProduct(TankForward, AIForwardIntention);
 
-	UE_LOG(LogTemp, Warning, TEXT("DIRECTION: %f, %f, %f"), AIForwardIntention.X, AIForwardIntention.Y, AIForwardIntention.Z);
 
-	RotateBase(RightDirection);
+	UE_LOG(LogTemp, Warning, TEXT("DIRECTION: %f"), ForwardDirection);
+	//UE_LOG(LogTemp, Warning, TEXT("DIRECTION: %f, %f, %f"), RightDirection.X, RightDirection.Y, RightDirection.Z);
+	RotateBase(RightDirection.Z);
 	Move(ForwardDirection);
 
 }

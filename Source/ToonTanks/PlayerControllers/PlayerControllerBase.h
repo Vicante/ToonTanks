@@ -6,15 +6,23 @@
 #include "GameFramework/PlayerController.h"
 #include "PlayerControllerBase.generated.h"
 
+class APawnTank;
+
 /**
  * 
  */
+
+class UTankMovementComponent;
+
 UCLASS()
 class TOONTANKS_API APlayerControllerBase : public APlayerController
 {
 	GENERATED_BODY()
 	
 public:
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 	
 	void SetPlayerEnabledState(bool SetPlayerEnabled);
 
@@ -23,6 +31,19 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+
+
+	APawnTank* PlayerTank;
+	float ForwardMovementDirection = 0.0f;
+	float RotationMovementDirection = 0.0f;
+
+	void CalculateMoveInput(float Value);
+	void CalculateRotationInput(float Value);
+	void Fire();
+	virtual void SetupInputComponent() override;
+
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UUserWidget> HealthScreenClass;
+
+	UTankMovementComponent* PawnMovementComponent;
 };

@@ -4,6 +4,7 @@
 #include "PawnTank.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h" 
+#include "../Components/TankMovementComponent.h"
 
 
 APawnTank::APawnTank()
@@ -13,6 +14,8 @@ APawnTank::APawnTank()
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
+
+	MovementComponent = CreateDefaultSubobject<UTankMovementComponent>(TEXT("Movement Component"));
 }
 
 void APawnTank::BeginPlay()
@@ -46,8 +49,8 @@ void APawnTank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	Rotate();
-	Move();
+	//Rotate();
+	//Move();
 
 	if (PlayerReference)
 	{
@@ -59,32 +62,10 @@ void APawnTank::Tick(float DeltaTime)
 }
 
 // Called to bind functionality to input
-void APawnTank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	PlayerInputComponent->BindAxis("MoveForward", this, &APawnTank::CalculateMoveInput);
-	PlayerInputComponent->BindAxis("Turn", this, &APawnTank::CalculateRotationInput);
-	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &APawnTank::Fire);
-}
-
-void APawnTank::CalculateMoveInput(float Value)
-{
-	MovementDirection = FVector(Value * MovementSpeed * GetWorld()->DeltaTimeSeconds, 0.0f,0.0f);
-}
-
-void APawnTank::CalculateRotationInput(float Value)
-{
-	float RotateAmount = Value * RotationSpeed * GetWorld()->DeltaTimeSeconds;
-	FRotator Rotation = FRotator(0.0f, RotateAmount, 0.0f);
-	RotationDirection = FQuat(Rotation);
-}
-
-void APawnTank::Move()
-{
-	AddActorLocalOffset(MovementDirection, true);
-}
-
-void APawnTank::Rotate()
-{
-	AddActorLocalRotation(RotationDirection, true);
-}
+//void APawnTank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+//{
+//	Super::SetupPlayerInputComponent(PlayerInputComponent);
+//	PlayerInputComponent->BindAxis("MoveForward", this, &APawnTank::CalculateMoveInput);
+//	PlayerInputComponent->BindAxis("Turn", this, &APawnTank::CalculateRotationInput);
+//	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &APawnTank::Fire);
+//}

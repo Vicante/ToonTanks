@@ -29,6 +29,8 @@ public:
 
 	void RotateTurret(FVector LookAtTarget);
 
+	void Fire();
+
 private:
 	//COMPONENTS
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly ,Category = "Components", meta = (AllowPrivateAccess = true))
@@ -54,7 +56,7 @@ private:
 
 protected:
 
-	void Fire();
+
 	FRotator CalculateComponentRotation(FVector LookAtTarget, FVector ComponentLocation);
 
 };

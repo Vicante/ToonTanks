@@ -3,7 +3,17 @@
 
 #include "PlayerControllerBase.h"
 #include "Blueprint/UserWidget.h"
+#include "../Components/TankMovementComponent.h"
+#include "../Pawns/PawnTank.h"
 
+
+void APlayerControllerBase::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	PawnMovementComponent->Move(ForwardMovementDirection);
+	PawnMovementComponent->RotateBase(RotationMovementDirection);
+	
+}
 
 void APlayerControllerBase::BeginPlay()
 {
@@ -13,6 +23,36 @@ void APlayerControllerBase::BeginPlay()
 	{
 		HealthWidget->AddToViewport();
 	}
+
+	PlayerTank = Cast<APawnTank>(GetPawn());
+
+	if (PlayerTank)
+	{
+		PawnMovementComponent = PlayerTank->FindComponentByClass<UTankMovementComponent>();
+	}
+}
+
+void APlayerControllerBase::CalculateMoveInput(float Value)
+{
+	ForwardMovementDirection = Value;
+}
+
+void APlayerControllerBase::CalculateRotationInput(float Value)
+{
+	RotationMovementDirection = Value;
+}
+
+void APlayerControllerBase::Fire()
+{
+}
+
+void APlayerControllerBase::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+	InputComponent->BindAxis(TEXT("MoveForward"), this, &APlayerControllerBase::CalculateMoveInput);
+	InputComponent->BindAxis("Turn", this, &APlayerControllerBase::CalculateRotationInput);
+	InputComponent->BindAction("Fire", IE_Pressed, this, &APlayerControllerBase::Fire);
+
 }
 
 void APlayerControllerBase::SetPlayerEnabledState(bool SetPlayerEnabled)

@@ -25,9 +25,9 @@ protected:
 	virtual void BeginPlay() override;
 	float ReturnDistanceToPlayer() const;
 
-private:
 	APawnTank* PlayerTank;
 	APawnEnemyTank* ControlledTank;
 	bool HasSeenPlayer = false;
 	float AcceptanceRadius = 200.0f;
+
 };

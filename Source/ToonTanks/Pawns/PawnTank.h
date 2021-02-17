@@ -8,6 +8,7 @@
 
 class USpringArmComponent;
 class UCameraComponent;
+class UTankMovementComponent;
 
 UCLASS()
 class TOONTANKS_API APawnTank : public APawnBase
@@ -22,21 +23,10 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	//virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	FVector MovementDirection;
 	FQuat RotationDirection;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = true))
-	float MovementSpeed = 100.0f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = true))
-	float RotationSpeed = 100.0f;
-
-	void CalculateMoveInput(float Value);
-	void CalculateRotationInput(float Value);
-
-	void Move();
-	void Rotate();
 
 	virtual void HandleDestruction() override;
 
@@ -53,6 +43,9 @@ private:
 	USpringArmComponent* SpringArm;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
 	UCameraComponent* Camera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
+	UTankMovementComponent* MovementComponent;
 
 	APlayerController* PlayerReference;
 	bool bIsPlayerAlive = true;

@@ -21,8 +21,6 @@ APawnTank::APawnTank()
 void APawnTank::BeginPlay()
 {
 	Super::BeginPlay();
-	PlayerReference = Cast<APlayerController>(GetController());
-
 	FVector TankLocation = GetActorLocation();
 
 	//TODO: Fix weird bug
@@ -48,24 +46,4 @@ bool APawnTank::GetIsPlayerAlive()
 void APawnTank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	//Rotate();
-	//Move();
-
-	if (PlayerReference)
-	{
-		FHitResult TraceHitResult;
-		PlayerReference->GetHitResultUnderCursor(ECC_Visibility, false, TraceHitResult);
-		FVector HitLocation = TraceHitResult.ImpactPoint;
-		RotateTurret(HitLocation);
-	}
 }
-
-// Called to bind functionality to input
-//void APawnTank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-//{
-//	Super::SetupPlayerInputComponent(PlayerInputComponent);
-//	PlayerInputComponent->BindAxis("MoveForward", this, &APawnTank::CalculateMoveInput);
-//	PlayerInputComponent->BindAxis("Turn", this, &APawnTank::CalculateRotationInput);
-//	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &APawnTank::Fire);
-//}

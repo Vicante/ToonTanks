@@ -4,20 +4,28 @@
 #include "PlayerControllerBase.h"
 #include "Blueprint/UserWidget.h"
 #include "../Components/TankMovementComponent.h"
+#include "../Components/AimingComponent.h"
 #include "../Pawns/PawnTank.h"
 
 
 void APlayerControllerBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	//Movement Behavior
 	PawnMovementComponent->Move(ForwardMovementDirection);
 	PawnMovementComponent->RotateBase(RotationMovementDirection);
-	
+	//Aiming Behavior
+	FHitResult TraceHitResult;
+	GetHitResultUnderCursor(ECC_Visibility, false, TraceHitResult);
+	FVector HitLocation = TraceHitResult.ImpactPoint;
+	AimingComponent->RotateTurret(HitLocation);
 }
 
 void APlayerControllerBase::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	//Creation of Health Widget
 	UUserWidget* HealthWidget = CreateWidget(this, HealthScreenClass);
 	if (HealthWidget != nullptr)
 	{
@@ -25,10 +33,10 @@ void APlayerControllerBase::BeginPlay()
 	}
 
 	PlayerTank = Cast<APawnTank>(GetPawn());
-
 	if (PlayerTank)
 	{
 		PawnMovementComponent = PlayerTank->FindComponentByClass<UTankMovementComponent>();
+		AimingComponent = PlayerTank->FindComponentByClass<UAimingComponent>();
 	}
 }
 

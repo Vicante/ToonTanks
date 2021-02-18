@@ -3,8 +3,9 @@
 
 #include "PawnBase.h"
 #include "Components/CapsuleComponent.h"
-#include "../Actors/ProjectileBase.h"
 #include "../Components/HealthComponent.h"
+#include "../Components/AimingComponent.h"
+#include "../Actors/ProjectileBase.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -26,6 +27,7 @@ APawnBase::APawnBase()
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
 
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
+	AimingComponent = CreateDefaultSubobject<UAimingComponent>(TEXT("Aiming Component"));
 }
 
 // Called when the game starts or when spawned
@@ -47,6 +49,11 @@ void APawnBase::Fire()
 	}
 }
 
+UStaticMeshComponent* APawnBase::GetTurretMesh() const
+{
+	return TurretMesh;
+}
+
 FRotator APawnBase::CalculateComponentRotation(FVector LookAtTarget, FVector ComponentLocation)
 {
 	FVector LookAtTargetCleaned = FVector(LookAtTarget.X, LookAtTarget.Y, ComponentLocation.Z);
@@ -59,11 +66,6 @@ void APawnBase::HandleDestruction()
 	UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticle, GetActorLocation());
 	UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
 	GetWorld()->GetFirstPlayerController()->ClientPlayCameraShake(DeathShake);
-}
-
-UStaticMeshComponent* APawnBase::GetBaseMesh()
-{
-	return BaseMesh;
 }
 
 float APawnBase::GetRemainingHealth() const

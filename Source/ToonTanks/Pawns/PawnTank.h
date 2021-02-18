@@ -23,7 +23,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
-	//virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
 
 	FVector MovementDirection;
 	FQuat RotationDirection;
@@ -43,10 +43,8 @@ private:
 	USpringArmComponent* SpringArm;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
 	UCameraComponent* Camera;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
 	UTankMovementComponent* MovementComponent;
 
-	APlayerController* PlayerReference;
 	bool bIsPlayerAlive = true;
 };

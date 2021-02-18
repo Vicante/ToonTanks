@@ -7,12 +7,12 @@
 #include "PlayerControllerBase.generated.h"
 
 class APawnTank;
+class UTankMovementComponent;
+class UAimingComponent;
 
 /**
  * 
  */
-
-class UTankMovementComponent;
 
 UCLASS()
 class TOONTANKS_API APlayerControllerBase : public APlayerController
@@ -40,10 +40,12 @@ private:
 	void CalculateMoveInput(float Value);
 	void CalculateRotationInput(float Value);
 	void Fire();
+
 	virtual void SetupInputComponent() override;
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UUserWidget> HealthScreenClass;
 
 	UTankMovementComponent* PawnMovementComponent;
+	UAimingComponent* AimingComponent;
 };

@@ -10,6 +10,7 @@
 class UCapsuleComponent;
 class AProjectileBase;
 class UHealthComponent;
+class UAimingComponent;
 
 UCLASS()
 class TOONTANKS_API APawnBase : public APawn
@@ -22,14 +23,14 @@ public:
 
 	virtual void HandleDestruction();
 
-	UStaticMeshComponent* GetBaseMesh();
-
 	UFUNCTION(BlueprintPure)
 	float GetRemainingHealth() const;
 
 	void RotateTurret(FVector LookAtTarget);
 
 	void Fire();
+
+	UStaticMeshComponent* GetTurretMesh() const;
 
 private:
 	//COMPONENTS
@@ -43,6 +44,8 @@ private:
 	USceneComponent* ProjectileSpawnPoint;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
 	UHealthComponent* HealthComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
+	UAimingComponent* AimingComponent;
 	//VARIABLES
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile Type", meta = (AllowPrivateAccess = true))
 	TSubclassOf<AProjectileBase> ProjectileClass;
@@ -54,8 +57,8 @@ private:
 	TSubclassOf<UCameraShake> DeathShake;
 
 
-protected:
 
+protected:
 
 	FRotator CalculateComponentRotation(FVector LookAtTarget, FVector ComponentLocation);
 

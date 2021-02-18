@@ -7,6 +7,7 @@
 #include "AimingComponent.generated.h"
 
 class AProjectileBase;
+class APawnBase;
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -21,6 +22,9 @@ public:
 	void RotateTurret(FVector LookAtTarget);
 	void Fire();
 
+	float GetFireRate() const;
+	float GetFireRange() const;
+
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -31,6 +35,12 @@ protected:
 private:	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile Type", meta = (AllowPrivateAccess = true))
 	TSubclassOf<AProjectileBase> ProjectileClass;
-
 	UStaticMeshComponent* TurretMesh;
+
+	APawnBase* OwnerPawn;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = true))
+	float FireRate = 2.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = true))
+	float FireRange = 500.0f;
 };

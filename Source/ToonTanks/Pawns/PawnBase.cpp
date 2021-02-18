@@ -30,14 +30,6 @@ APawnBase::APawnBase()
 	AimingComponent = CreateDefaultSubobject<UAimingComponent>(TEXT("Aiming Component"));
 }
 
-// Called when the game starts or when spawned
-
-void APawnBase::RotateTurret(FVector LookAtTarget)
-{
-	FRotator TurretRotation = CalculateComponentRotation(LookAtTarget, TurretMesh->GetComponentLocation());
-	TurretMesh->SetWorldRotation(TurretRotation);
-}
-
 void APawnBase::Fire()
 {
 	if (ProjectileClass)
@@ -54,13 +46,6 @@ UStaticMeshComponent* APawnBase::GetTurretMesh() const
 	return TurretMesh;
 }
 
-FRotator APawnBase::CalculateComponentRotation(FVector LookAtTarget, FVector ComponentLocation)
-{
-	FVector LookAtTargetCleaned = FVector(LookAtTarget.X, LookAtTarget.Y, ComponentLocation.Z);
-	FRotator ComponentRotation = FVector(LookAtTargetCleaned - ComponentLocation).Rotation();
-	return ComponentRotation;
-}
-
 void APawnBase::HandleDestruction()
 {
 	UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticle, GetActorLocation());
@@ -71,4 +56,14 @@ void APawnBase::HandleDestruction()
 float APawnBase::GetRemainingHealth() const
 {
 	return HealthComponent->CalculateHealthPercetage();
+}
+
+UAimingComponent* APawnBase::GetAimingComponent() const
+{
+	return AimingComponent;
+}
+
+USceneComponent* APawnBase::GetProjectileSpawnPoint() const
+{
+	return ProjectileSpawnPoint;
 }

@@ -10,8 +10,6 @@ void APawnTurret::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GetWorld()->GetTimerManager().SetTimer(FireRateTimerHandle, this, &APawnTurret::CheckFireCondition, FireRate, true);
-
 	PlayerTank = Cast<APawnTank> (UGameplayStatics::GetPlayerPawn(this, 0));
 }
 
@@ -21,47 +19,11 @@ void APawnTurret::HandleDestruction()
 	Destroy();
 }
 
-float APawnTurret::GetFireRange()
-{
-	return FireRange;
-}
-
-FTimerHandle APawnTurret::GetFireRateTimerHandle()
-{
-	return FireRateTimerHandle;
-}
-
-void APawnTurret::CheckFireCondition()
-{
-	if (!PlayerTank || !PlayerTank->GetIsPlayerAlive()) 
-	{
-		return;
-	}
-
-	if (ReturnDistanceToPlayer() <= FireRange)
-	{
-		Fire();
-	}
-	
-}
-
-float APawnTurret::ReturnDistanceToPlayer()
-{
-	if (!PlayerTank)
-	{
-		return 0.0f;
-	}
-	return FVector::Dist(PlayerTank->GetActorLocation(), GetActorLocation());
-}
-
-
 void APawnTurret::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (!PlayerTank || ReturnDistanceToPlayer() > FireRange)
+	if (!PlayerTank)
 	{
 		return;
 	}
-	
-	RotateTurret(PlayerTank->GetActorLocation());
 }

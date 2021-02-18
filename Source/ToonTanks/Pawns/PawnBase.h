@@ -26,11 +26,11 @@ public:
 	UFUNCTION(BlueprintPure)
 	float GetRemainingHealth() const;
 
-	void RotateTurret(FVector LookAtTarget);
-
-	void Fire();
-
+	UAimingComponent* GetAimingComponent() const;
+	USceneComponent* GetProjectileSpawnPoint() const;
 	UStaticMeshComponent* GetTurretMesh() const;
+	
+	void Fire();
 
 private:
 	//COMPONENTS
@@ -55,11 +55,5 @@ private:
 	USoundBase* DeathSound;
 	UPROPERTY(EditAnywhere, Category = "Effects")
 	TSubclassOf<UCameraShake> DeathShake;
-
-
-
-protected:
-
-	FRotator CalculateComponentRotation(FVector LookAtTarget, FVector ComponentLocation);
 
 };

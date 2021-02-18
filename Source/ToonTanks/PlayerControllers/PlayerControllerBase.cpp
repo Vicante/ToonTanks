@@ -52,6 +52,7 @@ void APlayerControllerBase::CalculateRotationInput(float Value)
 
 void APlayerControllerBase::Fire()
 {
+	AimingComponent->Fire();
 }
 
 void APlayerControllerBase::SetupInputComponent()

@@ -6,12 +6,15 @@
 #include "Runtime/Engine/Classes/GameFramework/PlayerController.h"
 #include "../Pawns/PawnTank.h"
 #include "../Pawns/PawnEnemyTank.h"
+#include "../Components/AimingComponent.h"
+#include "Engine/EngineTypes.h"
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 	PlayerTank = Cast<APawnTank> (GetWorld()->GetFirstPlayerController()->GetPawn());
 	ControlledTank = Cast<APawnEnemyTank>(GetPawn());
+	GetWorld()->GetTimerManager().SetTimer(FireRateTimerHandle, this, &ATankAIController::CheckFireCondition, ControlledTank->GetAimingComponent()->GetFireRate(), true);
 }
 
 void ATankAIController::Tick(float DeltaTime)
@@ -30,6 +33,7 @@ void ATankAIController::Tick(float DeltaTime)
 	//Chase player
 	if (HasSeenPlayer)
 	{
+		ControlledTank->GetAimingComponent()->RotateTurret(PlayerTank->GetActorLocation());
 		MoveToActor(PlayerTank, AcceptanceRadius);
 	}
 }
@@ -41,5 +45,18 @@ float ATankAIController::ReturnDistanceToPlayer() const
 		return 0.0f;
 	}
 	return FVector::Dist(PlayerTank->GetActorLocation(), ControlledTank->GetActorLocation());
+}
+
+void ATankAIController::CheckFireCondition()
+{
+	if (!PlayerTank || !PlayerTank->GetIsPlayerAlive())
+	{
+		return;
+	}
+
+	if (ReturnDistanceToPlayer() <= ControlledTank->GetAimingComponent()->GetFireRange())
+	{
+		ControlledTank->GetAimingComponent()->Fire();
+	}
 }
 

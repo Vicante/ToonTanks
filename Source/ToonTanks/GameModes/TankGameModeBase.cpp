@@ -65,4 +65,9 @@ void ATankGameModeBase::ActorDied(AActor* DeadActor)
 	}
 }
 
+int ATankGameModeBase::GetTargetEnemies() const
+{
+	return TargetEnemies;
+}
+
 

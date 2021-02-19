@@ -30,6 +30,8 @@ private:
 public:
 	void ActorDied(AActor* DeadActor);
 
+	int GetTargetEnemies() const;
+
 protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Game Loop", meta = (AllowPrivateAccess = true))

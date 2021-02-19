@@ -14,6 +14,4 @@ class TOONTANKS_API ASniperTankAIController : public ATankAIController
 {
 	GENERATED_BODY()
 
-public:
-	virtual void Tick(float DeltaTime) override;
 };

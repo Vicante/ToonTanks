@@ -45,7 +45,6 @@ void ATankAIController::Tick(float DeltaTime)
 			MoveToActor(PlayerTank, AcceptanceRadius);
 		}
 	}
-	//UE_LOG(LogTemp, Warning, TEXT(""))
 }
 
 float ATankAIController::ReturnDistanceToPlayer() const
@@ -59,7 +58,7 @@ float ATankAIController::ReturnDistanceToPlayer() const
 
 void ATankAIController::CheckFireCondition()
 {
-	if (!PlayerTank) //AQUI FALTA VER SI PLAYER ESTA VIVO
+	if (!PlayerTank || !PlayerTank->GetIsPlayerAlive())
 	{
 		return;
 	}

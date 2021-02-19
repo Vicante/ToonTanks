@@ -3,7 +3,6 @@
 
 #include "TankGameModeBase.h"
 #include "../Pawns/PawnPlayerTank.h"
-#include "../Pawns/PawnTurret.h"
 #include "Kismet/GameplayStatics.h"
 #include "../PlayerControllers/PlayerControllerBase.h"
 

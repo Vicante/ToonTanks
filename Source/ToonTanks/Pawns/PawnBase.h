@@ -45,7 +45,8 @@ private:
 	UHealthComponent* HealthComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
 	UAimingComponent* AimingComponent;
-
+	//VARIABLES
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Range", meta = (AllowPrivateAccess = true))
 	float CombatRange = 800.0f;
 
 protected:

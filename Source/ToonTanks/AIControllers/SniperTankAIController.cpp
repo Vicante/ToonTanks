@@ -8,15 +8,15 @@
 void ASniperTankAIController::Tick(float DeltaTime)
 {
 	//If the player is either dead, do nothing
-	if (!PlayerTank)
-	{
-		return;
-	}
-	//Check if the player was seen
-	if (ReturnDistanceToPlayer() <= ControlledTank->GetCombatRange())
-	{
-		HasSeenPlayer = true;
-	}
+	//if (!PlayerTank)
+	//{
+	//	return;
+	//}
+	////Check if the player was seen
+	//if (ReturnDistanceToPlayer() <= ControlledTank->GetCombatRange())
+	//{
+	//	HasSeenPlayer = true;
+	//}
 
 	////Chase Player until near enough
 	//	//Pause

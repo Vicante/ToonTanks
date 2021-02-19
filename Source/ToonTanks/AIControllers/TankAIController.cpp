@@ -4,17 +4,24 @@
 #include "TankAIController.h"
 #include "Engine/World.h"
 #include "Runtime/Engine/Classes/GameFramework/PlayerController.h"
-#include "../Pawns/PawnTank.h"
-#include "../Pawns/PawnEnemyTank.h"
+#include "../Pawns/PawnPlayerTank.h"
+#include "../Pawns/PawnBase.h"
 #include "../Components/AimingComponent.h"
+#include "../Components/TankMovementComponent.h"
 #include "Engine/EngineTypes.h"
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
-	PlayerTank = Cast<APawnTank> (GetWorld()->GetFirstPlayerController()->GetPawn());
-	ControlledTank = Cast<APawnEnemyTank>(GetPawn());
+	PlayerTank = Cast<APawnPlayerTank> (GetWorld()->GetFirstPlayerController()->GetPawn());
+	ControlledTank = Cast<APawnBase>(GetPawn());
+
 	GetWorld()->GetTimerManager().SetTimer(FireRateTimerHandle, this, &ATankAIController::CheckFireCondition, ControlledTank->GetAimingComponent()->GetFireRate(), true);
+	auto MovementComponent = ControlledTank->FindComponentByClass<UTankMovementComponent>();
+	if (MovementComponent)
+	{
+		HasMovementComponent = true;
+	}
 }
 
 void ATankAIController::Tick(float DeltaTime)
@@ -29,13 +36,16 @@ void ATankAIController::Tick(float DeltaTime)
 	{
 		HasSeenPlayer = true;
 	}
-
 	//Chase player
 	if (HasSeenPlayer)
 	{
 		ControlledTank->GetAimingComponent()->RotateTurret(PlayerTank->GetActorLocation());
-		MoveToActor(PlayerTank, AcceptanceRadius);
+		if (HasMovementComponent)
+		{
+			MoveToActor(PlayerTank, AcceptanceRadius);
+		}
 	}
+	//UE_LOG(LogTemp, Warning, TEXT(""))
 }
 
 float ATankAIController::ReturnDistanceToPlayer() const
@@ -49,7 +59,7 @@ float ATankAIController::ReturnDistanceToPlayer() const
 
 void ATankAIController::CheckFireCondition()
 {
-	if (!PlayerTank || !PlayerTank->GetIsPlayerAlive())
+	if (!PlayerTank) //AQUI FALTA VER SI PLAYER ESTA VIVO
 	{
 		return;
 	}

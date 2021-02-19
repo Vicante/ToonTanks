@@ -9,12 +9,6 @@
 
 APawnTank::APawnTank()
 {
-	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
-	SpringArm->SetupAttachment(RootComponent);
-
-	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-	Camera->SetupAttachment(SpringArm);
-
 	MovementComponent = CreateDefaultSubobject<UTankMovementComponent>(TEXT("Movement Component"));
 }
 
@@ -24,26 +18,6 @@ void APawnTank::BeginPlay()
 	FVector TankLocation = GetActorLocation();
 
 	//TODO: Fix weird bug
-	SetActorLocation(FVector(TankLocation.X, TankLocation.Y, 88.0f));
+	SetActorLocation(FVector(TankLocation.X, TankLocation.Y, 89.0f));
 }
 
-void APawnTank::HandleDestruction()
-{
-	Super::HandleDestruction();
-
-	bIsPlayerAlive = false;
-
-	SetActorHiddenInGame(true);
-	SetActorTickEnabled(false);
-}
-
-bool APawnTank::GetIsPlayerAlive()
-{
-	return bIsPlayerAlive;
-}
-
-// Called every frame
-void APawnTank::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}

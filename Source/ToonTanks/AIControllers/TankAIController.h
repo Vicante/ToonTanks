@@ -6,8 +6,8 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-class APawnTank;
-class APawnEnemyTank;
+class APawnPlayerTank;
+class APawnBase;
 
 /**
  * 
@@ -27,11 +27,11 @@ protected:
 
 	void CheckFireCondition();
 
-	APawnTank* PlayerTank;
-	APawnEnemyTank* ControlledTank;
+	APawnPlayerTank* PlayerTank;
+	APawnBase* ControlledTank;
 	bool HasSeenPlayer = false;
+	bool HasMovementComponent = false;
 	float AcceptanceRadius = 200.0f;
-
 	FTimerHandle FireRateTimerHandle;
 
 };

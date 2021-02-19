@@ -15,7 +15,6 @@ class TOONTANKS_API APawnTurret : public APawnBase
 
 public:
 
-	virtual void Tick(float DeltaTime) override;
 	virtual void HandleDestruction() override;
 
 protected:

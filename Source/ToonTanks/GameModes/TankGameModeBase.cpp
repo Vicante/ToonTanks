@@ -2,7 +2,7 @@
 
 
 #include "TankGameModeBase.h"
-#include "../Pawns/PawnTank.h"
+#include "../Pawns/PawnPlayerTank.h"
 #include "../Pawns/PawnTurret.h"
 #include "Kismet/GameplayStatics.h"
 #include "../PlayerControllers/PlayerControllerBase.h"
@@ -13,17 +13,17 @@ void ATankGameModeBase::BeginPlay()
 	HandleGameStart();
 }
 
-int32 ATankGameModeBase::GetTurretCount()
+int32 ATankGameModeBase::GetEnemyCount()
 {
-	TArray<AActor*> TurretActors;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APawnTurret::StaticClass(), TurretActors);
-	return TurretActors.Num();
+	TArray<AActor*> EnemyActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APawnBase::StaticClass(), EnemyActors);
+	return EnemyActors.Num() - 1;
 }
 
 void ATankGameModeBase::HandleGameStart()
 {
-	TargetTurrets = GetTurretCount();
-	PlayerTank = Cast<APawnTank>(UGameplayStatics::GetPlayerPawn(this, 0));
+	TargetEnemies = GetEnemyCount();
+	PlayerTank = Cast<APawnPlayerTank>(UGameplayStatics::GetPlayerPawn(this, 0));
 	PlayerControllerRef = Cast<APlayerControllerBase>(UGameplayStatics::GetPlayerController(this, 0));
 	GameStart();
 
@@ -55,11 +55,11 @@ void ATankGameModeBase::ActorDied(AActor* DeadActor)
 			PlayerControllerRef->SetPlayerEnabledState(false);
 		}
 	}
-	else if (APawnTurret* DestroyedTurret = Cast<APawnTurret> (DeadActor))
+	else if (APawnBase* DestroyedTurret = Cast<APawnBase> (DeadActor))
 	{
 		DestroyedTurret->HandleDestruction();
-		TargetTurrets--;
-		if (TargetTurrets <= 0)
+		TargetEnemies--;
+		if (TargetEnemies <= 0)
 		{
 			HandleGameOver(true);
 		}

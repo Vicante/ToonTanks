@@ -10,20 +10,10 @@ void APawnTurret::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PlayerTank = Cast<APawnTank> (UGameplayStatics::GetPlayerPawn(this, 0));
 }
 
 void APawnTurret::HandleDestruction()
 {
 	Super::HandleDestruction();
 	Destroy();
-}
-
-void APawnTurret::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-	if (!PlayerTank)
-	{
-		return;
-	}
 }

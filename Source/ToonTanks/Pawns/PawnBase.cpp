@@ -30,20 +30,14 @@ APawnBase::APawnBase()
 	AimingComponent = CreateDefaultSubobject<UAimingComponent>(TEXT("Aiming Component"));
 }
 
-void APawnBase::Fire()
-{
-	if (ProjectileClass)
-	{
-		FVector SpawnLocation = ProjectileSpawnPoint->GetComponentLocation();
-		FRotator SpawnRotation = ProjectileSpawnPoint->GetComponentRotation();
-		AProjectileBase* TempProjectile = GetWorld()->SpawnActor<AProjectileBase>(ProjectileClass, SpawnLocation, SpawnRotation);
-		TempProjectile->SetOwner(this);
-	}
-}
-
 UStaticMeshComponent* APawnBase::GetTurretMesh() const
 {
 	return TurretMesh;
+}
+
+float APawnBase::GetCombatRange() const
+{
+	return CombatRange;
 }
 
 void APawnBase::HandleDestruction()
@@ -51,6 +45,7 @@ void APawnBase::HandleDestruction()
 	UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticle, GetActorLocation());
 	UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
 	GetWorld()->GetFirstPlayerController()->ClientPlayCameraShake(DeathShake);
+	Destroy();
 }
 
 float APawnBase::GetRemainingHealth() const

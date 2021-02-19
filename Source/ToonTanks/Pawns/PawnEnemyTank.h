@@ -16,9 +16,6 @@ class TOONTANKS_API APawnEnemyTank : public APawnTurret
 	GENERATED_BODY()
 
 public:
-	
-	FVector MovementDirection;
-	FQuat RotationDirection;
 	float GetCombatRange();
 
 private:

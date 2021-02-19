@@ -19,25 +19,10 @@ public:
 
 	APawnTank();
 
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	virtual void HandleDestruction() override;
-
-	bool GetIsPlayerAlive();
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
 private:
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
-	USpringArmComponent* SpringArm;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
-	UCameraComponent* Camera;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
 	UTankMovementComponent* MovementComponent;
-
-	bool bIsPlayerAlive = true;
 };

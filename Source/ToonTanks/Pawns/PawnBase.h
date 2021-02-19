@@ -29,8 +29,7 @@ public:
 	UAimingComponent* GetAimingComponent() const;
 	USceneComponent* GetProjectileSpawnPoint() const;
 	UStaticMeshComponent* GetTurretMesh() const;
-	
-	void Fire();
+	float GetCombatRange() const;
 
 private:
 	//COMPONENTS
@@ -46,9 +45,11 @@ private:
 	UHealthComponent* HealthComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
 	UAimingComponent* AimingComponent;
-	//VARIABLES
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile Type", meta = (AllowPrivateAccess = true))
-	TSubclassOf<AProjectileBase> ProjectileClass;
+
+	float CombatRange = 800.0f;
+
+protected:
+	//EFFECTS
 	UPROPERTY(EditAnywhere, Category = "Effects")
 	UParticleSystem* DeathParticle;
 	UPROPERTY(EditAnywhere, Category = "Effects")

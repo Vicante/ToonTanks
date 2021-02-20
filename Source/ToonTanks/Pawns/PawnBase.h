@@ -25,7 +25,7 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	float GetRemainingHealth() const;
-
+	float GetAcceptanceRadius() const;
 	UAimingComponent* GetAimingComponent() const;
 	USceneComponent* GetProjectileSpawnPoint() const;
 	UStaticMeshComponent* GetTurretMesh() const;
@@ -48,6 +48,8 @@ private:
 	//VARIABLES
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat Range", meta = (AllowPrivateAccess = true))
 	float CombatRange = 800.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acceptance Radius", meta = (AllowPrivateAccess = true))
+	float AcceptanceRadius = 200.0f;
 
 protected:
 	//EFFECTS

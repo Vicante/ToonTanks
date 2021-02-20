@@ -31,8 +31,6 @@ protected:
 	APawnBase* ControlledTank;
 	bool HasSeenPlayer = false;
 	bool HasMovementComponent = false;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acceptance Radius", meta = (AllowPrivateAccess = true))
-	float AcceptanceRadius = 200.0f;
 	FTimerHandle FireRateTimerHandle;
 
 };

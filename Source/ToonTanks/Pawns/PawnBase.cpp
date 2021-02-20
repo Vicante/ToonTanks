@@ -40,6 +40,11 @@ float APawnBase::GetCombatRange() const
 	return CombatRange;
 }
 
+float APawnBase::GetAcceptanceRadius() const
+{
+	return AcceptanceRadius;
+}
+
 void APawnBase::HandleDestruction()
 {
 	UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticle, GetActorLocation());

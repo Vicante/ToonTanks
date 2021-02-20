@@ -27,6 +27,8 @@ public:
 	
 	float CalculateHealthPercetage() const;
 
+	void RegainHealth(float HealthValue);
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

@@ -31,6 +31,8 @@ public:
 	UStaticMeshComponent* GetTurretMesh() const;
 	float GetCombatRange() const;
 
+	void RegainHealth(float HealthValue);
+
 private:
 	//COMPONENTS
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly ,Category = "Components", meta = (AllowPrivateAccess = true))

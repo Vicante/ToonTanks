@@ -20,6 +20,11 @@ float UHealthComponent::CalculateHealthPercetage() const
 	return Health/DefaultHealth;
 }
 
+void UHealthComponent::RegainHealth(float HealthValue)
+{
+	Health = FMath::Clamp(Health + HealthValue, Health, DefaultHealth);
+}
+
 
 // Called when the game starts
 void UHealthComponent::BeginPlay()

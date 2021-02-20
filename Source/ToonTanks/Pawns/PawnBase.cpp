@@ -40,6 +40,11 @@ float APawnBase::GetCombatRange() const
 	return CombatRange;
 }
 
+void APawnBase::RegainHealth(float HealthValue)
+{
+	HealthComponent->RegainHealth(HealthValue);
+}
+
 float APawnBase::GetAcceptanceRadius() const
 {
 	return AcceptanceRadius;

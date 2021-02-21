@@ -39,6 +39,8 @@ private:
 	FVector ClosedLocation;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Positions", meta = (AllowPrivateAccess = true))
 	float DoorOffset = 80.0f;
+	UPROPERTY(EditAnywhere, Category = "Effects")
+	USoundBase* OpenSound;
 	int EnemyNumber;
 	ATankGameModeBase* CurrentGameMode;
 };

@@ -4,6 +4,7 @@
 #include "Door.h"
 #include "Engine/World.h"
 #include "../GameModes/TankGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ADoor::ADoor()

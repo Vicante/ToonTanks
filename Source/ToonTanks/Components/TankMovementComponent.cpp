@@ -28,8 +28,6 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	auto ForwardDirection = FVector::DotProduct(TankForward, AIForwardIntention);
 	auto RightDirection = FVector::CrossProduct(TankForward, AIForwardIntention);
 
-	UE_LOG(LogTemp, Warning, TEXT("MOVE: %f"), ForwardDirection);
-
 	RotateBase(RightDirection.Z);
 	Move(ForwardDirection);
 }

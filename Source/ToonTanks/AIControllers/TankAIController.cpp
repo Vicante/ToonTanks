@@ -42,6 +42,7 @@ void ATankAIController::Tick(float DeltaTime)
 		ControlledTank->GetAimingComponent()->RotateTurret(PlayerTank->GetActorLocation());
 		if (HasMovementComponent)
 		{
+			
 			MoveToActor(PlayerTank, ControlledTank->GetAcceptanceRadius());
 		}
 	}

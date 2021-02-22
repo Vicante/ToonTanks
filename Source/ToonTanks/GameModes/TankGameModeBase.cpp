@@ -22,7 +22,6 @@ int32 ATankGameModeBase::GetEnemyCount()
 void ATankGameModeBase::HandleGameStart()
 {
 	TargetEnemies = GetEnemyCount();
-	//UE_LOG(LogTemp, Warning, TEXT("ENEMIES: %f"), TargetEnemies);
 	PlayerTank = Cast<APawnPlayerTank>(UGameplayStatics::GetPlayerPawn(this, 0));
 	PlayerControllerRef = Cast<APlayerControllerBase>(UGameplayStatics::GetPlayerController(this, 0));
 	GameStart();
